@@ -13,16 +13,16 @@ def test_search_calls_correct_endpoint(client):
     client.get.return_value = {"data": []}
     search(client, query="Taylor Swift", type="artist")
     client.get.assert_called_once_with(
-        "/search/artist",
-        params={"q": "Taylor Swift", "limit": 100, "offset": 0},
+        "/search",
+        params={"q": "Taylor Swift", "limit": 100, "offset": 0, "type": "artists"},
     )
 
 
-def test_search_all_uses_multi_endpoint(client):
+def test_search_all_uses_search_endpoint(client):
     client.get.return_value = {"data": []}
     search(client, query="Taylor Swift", type="all")
     client.get.assert_called_once_with(
-        "/search/multi",
+        "/search",
         params={"q": "Taylor Swift", "limit": 100, "offset": 0},
     )
 

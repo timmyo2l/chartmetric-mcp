@@ -75,7 +75,7 @@ All date parameters use **`YYYY-MM-DD`** format (ISO 8601 date). Examples: `"202
 
 ## MCP Tools
 
-All tools return structured text. **Pagination:** v1 uses a fixed `limit=50` on all list endpoints; no `offset` parameter is exposed to Claude.
+All tools return structured text. **Pagination:** All list endpoints use `limit=100`. Each list tool accepts an optional `offset: int = 0` parameter. When exactly 100 results are returned, the tool appends: `"100 results returned — there may be more. Ask me to load the next page to continue."` Claude will then prompt the user and call the tool again with `offset=100` (then `offset=200`, etc.) if they want more.
 
 ---
 
@@ -221,5 +221,4 @@ All chart tools accept `date` (`YYYY-MM-DD`) and `country` (ISO 3166-1 alpha-2, 
 - Write/POST endpoints (Chartmetric API is read-only)
 - Response caching
 - Multi-user auth
-- Pagination beyond fixed limit=50 (v1)
 - Configurable API base URL
